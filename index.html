@@ -23,17 +23,20 @@
         <md-tab-label>VIN</md-tab-label>
         <md-tab-body>
           <form layout="column" layout-padding ng-submit="vm.vinLookup()">
-            <md-input-container flex> 
-              <label>VIN</label>
-              <input ng-model="vm.form.vin">
-            </md-input-container>
+            <div layout="row" layout-align="space-between start">
+              <md-input-container flex>
+                <label>VIN</label>
+                <input ng-model="vm.form.vin">
+              </md-input-container>
+              <md-button class="md-raised" type="submit">Lookup</md-button>
+            </div>
             <md-list ng-if="vm.form">
               <md-list-item class="md-2-line">
                 <div class="md-list-item-text md-offset">
-                  <h3>{{vm.form.vinMake}} {{vm.form.vinModel}}</h3> 
+                  <h3>{{vm.form.vinMake}} {{vm.form.vinModel}}</h3>
                   <p><strong>Year: </strong> {{vm.form.vinYear}}</p>
                 </div>
-              </md-list-item> 
+              </md-list-item>
             </md-list>
           </form>
         </md-tab-body>

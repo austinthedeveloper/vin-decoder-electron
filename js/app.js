@@ -2,7 +2,7 @@ var app = angular.module('plnkrApp', ['ngMaterial', 'edmundsApi']);
 app
   .controller("DemoController",['edmundsService', function(edmundsService) {
     var vm = this;
-    
+
     vm.form = {};
     vm.form.vin = '';
     vm.vinLookup = function() {
@@ -17,12 +17,12 @@ app
           vm.form = {
           	vinMake : vinInfo.make.name,
             vinModel : vinInfo.model.name,
-	        vinYear : vinInfo.years[0].year,
-          }          
+	          vinYear : vinInfo.years[0].year,
+          }
         });
       }
     };
-    
+
     vm.getMakes = function(year) {
       edmundsService.getMakes(year).then(function(data) {
         vm.makes = data.makes;
@@ -30,11 +30,11 @@ app
       });
     };
     vm.getMakes();
-    
+
     vm.getModels = function(make, year){
       edmundsService.getModels(make, year).then(function(data) {
         vm.models = data.models;
       });
     };
-    
+
   }]);

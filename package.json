@@ -1,7 +1,7 @@
 {
-  "name": "electron-quick-start",
+  "name": "electron-vin-decoder",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "A tool to help people decode VINs.",
   "main": "main.js",
   "scripts": {
     "start": "electron main.js"
@@ -12,16 +12,13 @@
   },
   "keywords": [
     "Electron",
-    "quick",
-    "start",
-    "tutorial"
   ],
-  "author": "GitHub",
+  "author": "DRN",
   "license": "CC0-1.0",
   "bugs": {
-    "url": "https://github.com/atom/electron-quick-start/issues"
+    "url": "https://github.com/austinthedeveloper/vin-decoder-electron/issues"
   },
-  "homepage": "https://github.com/atom/electron-quick-start#readme",
+  "homepage": "https://github.com/austinthedeveloper/vin-decoder-electron#readme",
   "devDependencies": {
     "electron-prebuilt": "^0.36.0"
   }
