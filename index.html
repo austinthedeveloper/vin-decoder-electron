@@ -2,12 +2,65 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <title>DRN VIN</title>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.5/angular-material.min.css">
+
+    <!-- Angular Material Dependencies -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.5/angular-material.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="js/app.js"></script>
+    <script src="js/edmunds.js"></script>
   </head>
-  <body>
-    <h1>Hello World!</h1>
-    We are using node <script>document.write(process.versions.node)</script>,
-    Chrome <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
+  <body ng-app="plnkrApp" ng-controller="DemoController as vm" layout="column">
+    <div class="header">
+      <h1>VIN Decoder</h1>
+    </div>
+    <md-tabs md-stretch-tabs="always" flex>
+      <md-tab>
+        <md-tab-label>VIN</md-tab-label>
+        <md-tab-body>
+          <form layout="column" layout-padding ng-submit="vm.vinLookup()">
+            <md-input-container flex> 
+              <label>VIN</label>
+              <input ng-model="vm.form.vin">
+            </md-input-container>
+            <md-list ng-if="vm.form">
+              <md-list-item class="md-2-line">
+                <div class="md-list-item-text md-offset">
+                  <h3>{{vm.form.vinMake}} {{vm.form.vinModel}}</h3> 
+                  <p><strong>Year: </strong> {{vm.form.vinYear}}</p>
+                </div>
+              </md-list-item> 
+            </md-list>
+          </form>
+        </md-tab-body>
+      </md-tab>
+      <md-tab>
+        <md-tab-label>Make/Model</md-tab-label>
+        <md-tab-body>
+          <section layout="column" layout-padding>
+            <md-input-container flex>
+              <label>Year</label>
+              <input ng-model="vm.form.year" ng-blur="vm.getMakes(vm.form.year)">
+            </md-input-container>
+            <md-input-container>
+              <label>Make</label>
+              <md-select ng-model="vm.form.make">
+                  <md-option ng-value="make.niceName" ng-repeat="make in vm.makes" ng-click="vm.getModels(make.niceName, vm.form.year)">{{make.name}}</md-option>
+              </md-select>
+            </md-input-container>
+            <md-input-container>
+              <label>Model</label>
+              <md-select ng-model="vm.form.model">
+                  <md-option ng-value="model.name" ng-repeat="model in vm.models">{{model.name}}</md-option>
+              </md-select>
+            </md-input-container>
+          </section>
+        </md-tab-body>
+      </md-tab>
+    </md-tabs>
   </body>
 </html>
