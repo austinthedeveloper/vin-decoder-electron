@@ -18,7 +18,7 @@ app
           	vinMake : vinInfo.make.name,
             vinModel : vinInfo.model.name,
 	          vinYear : vinInfo.years[0].year,
-          }
+          };
         });
       }
     };
@@ -38,3 +38,5 @@ app
     };
 
   }]);
+
+  require('./edmunds.js');

@@ -1,0 +1,25 @@
+{
+  "name": "electron-vin-decoder",
+  "description": "A tool to help people decode VINs.",
+  "main": "main.js",
+  "authors": [
+    "DRN"
+  ],
+  "license": "CC0-1.0",
+  "keywords": [
+    "Electron"
+  ],
+  "homepage": "https://github.com/austinthedeveloper/vin-decoder-electron",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-material": "^1.0.5",
+    "normalize-strings": "normalize#^1.0.4"
+  }
+}
