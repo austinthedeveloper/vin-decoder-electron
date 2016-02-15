@@ -13,7 +13,7 @@
     <script src="js/app.js"></script>
     <script src="js/edmunds.js"></script>
   </head>
-  <body ng-app="plnkrApp" ng-controller="DemoController as vm" layout="column">
+  <body ng-app="plnkrApp" ng-controller="VINController as vm" layout="column">
     <div class="header">
       <h1>VIN Decoder</h1>
     </div>
@@ -21,23 +21,22 @@
       <md-tab>
         <md-tab-label>VIN</md-tab-label>
         <md-tab-body>
-          <form layout="column" layout-padding ng-submit="vm.vinLookup()">
+          <form layout="column" layout-padding ng-submit="vm.checkVins(vm.vins)" name="vinForm">
             <div layout="row" layout-align="space-between start">
-              <md-input-container flex>
-                <label>VIN</label>
-                <input ng-model="vm.form.vin">
-              </md-input-container>
-              <md-button class="md-raised" type="submit">Lookup</md-button>
+              <md-chips ng-model="vm.vins" md-separator-keys="vm.keys" placeholder="Enter a VIN" flex required></md-chips>
+              
+              <md-button class="md-raised" type="submit" ng-disabled="!vm.vins.length">Lookup</md-button>
             </div>
-            <md-list ng-if="vm.form">
-              <md-list-item class="md-2-line">
+            <md-list>
+              <md-list-item class="md-2-line" ng-repeat="result in vm.res">
                 <div class="md-list-item-text md-offset">
-                  <h3>{{vm.form.vinMake}} {{vm.form.vinModel}}</h3>
-                  <p><strong>Year: </strong> {{vm.form.vinYear}}</p>
+                  <h3>{{result.make}} {{result.model}}</h3>
+                  <p ng-if="result.year"><strong>Year: </strong> {{result.year}}</p>
+                  <p ng-if="result.vin"><strong>VIN: </strong> {{result.vin}}</p>
                 </div>
               </md-list-item>
             </md-list>
-          </form>
+          </form>          
         </md-tab-body>
       </md-tab>
       <md-tab>

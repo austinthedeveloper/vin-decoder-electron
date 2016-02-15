@@ -21,6 +21,9 @@ angular.module('edmundsApi')
           })
           .success(function(data) {
             delay.resolve(data);
+          })
+          .error(function(data) {
+            delay.reject(data);
           });
 
         return delay.promise;

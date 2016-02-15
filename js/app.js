@@ -1,27 +1,42 @@
 var app = angular.module('plnkrApp', ['ngMaterial', 'edmundsApi']);
 app
-  .controller("DemoController",['edmundsService', function(edmundsService) {
+  .controller("VINController",['edmundsService', '$mdConstant', function(edmundsService, $mdConstant) {
     var vm = this;
 
-    vm.form = {};
-    vm.form.vin = '';
-    vm.vinLookup = function() {
-      if (vm.form.vin === undefined) {
-        return;
+    vm.vins = [];
+    // vm.vins = ['2C4rc1BG3ER470728','1HGCG224XYA009087','5Y2Sl65817Z441059'];
+    vm.res = [];
+
+    vm.keys = [$mdConstant.KEY_CODE.ENTER, $mdConstant.KEY_CODE.COMMA, $mdConstant.KEY_CODE.SPACE];
+
+    vm.checkVins = function(vinsArray) {
+      if(vinsArray && vinsArray.length) {
+        for (i = 0; i < vinsArray.length; i++) { 
+            vinLookup(vinsArray[i]);
+        }
       }
-      if (vm.form.vin.length == 17) {
-        var vin = vm.form.vin;
+      vm.vins = [];
+    };
+
+    function vinLookup(vin) {
+      if (vin.length == 17) {
         edmundsService.get(vin).then(function(data) {
-          vm.data = data;
-          var vinInfo = data;
-          vm.form = {
-          	vinMake : vinInfo.make.name,
-            vinModel : vinInfo.model.name,
-	          vinYear : vinInfo.years[0].year,
+          var res = {
+          	make : data.make.name,
+            model : data.model.name,
+	          year : data.years[0].year,
+            vin: vin.toUpperCase()
           };
+          vm.res.push(res);
+        },function(err) {
+          var res = {
+            make : 'VIN not found',
+            vin: vin.toUpperCase()
+          };
+          vm.res.push(res);
         });
       }
-    };
+    }
 
     vm.getMakes = function(year) {
       edmundsService.getMakes(year).then(function(data) {
@@ -29,7 +44,7 @@ app
         vm.form.model = '';
       });
     };
-    vm.getMakes();
+    // vm.getMakes();
 
     vm.getModels = function(make, year){
       edmundsService.getModels(make, year).then(function(data) {
@@ -38,5 +53,3 @@ app
     };
 
   }]);
-
-  require('./edmunds.js');
