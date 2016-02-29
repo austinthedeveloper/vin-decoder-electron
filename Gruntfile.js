@@ -21,14 +21,21 @@ module.exports = function(grunt) {
     watch: {
       css: {
         files: ['sass/**/*.scss'],
-        tasks: ['compass'],
+        tasks: ['compass', 'copy'],
         options: {
           spawn: false,
         },
       },
       js: {
         files: ['js/**/*.js'],
-        tasks: ['jshint', 'browserify'],
+        tasks: ['jshint', 'browserify', 'copy'],
+        options: {
+          spawn: false,
+        },
+      },
+      html: {
+        files: ['**/*.html'],
+        tasks: ['copy'],
         options: {
           spawn: false,
         },
@@ -43,6 +50,15 @@ module.exports = function(grunt) {
           'app.js' : ['./js/app.js']
         }
       }
+    },
+    copy: {
+      dev: {
+        files: [{
+          expand: true,
+          src: ['index.html', 'app.js', './css/**/*.css'],
+          dest: 'build'
+        }]
+      }
     }
   });
 
@@ -51,8 +67,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-copy');
 
   // Default task(s).
-  grunt.registerTask('default', ['compass', 'browserify', 'watch']);
+  grunt.registerTask('default', ['compass', 'browserify', 'copy', 'watch']);
 
 };
