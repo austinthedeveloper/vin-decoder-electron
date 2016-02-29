@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = ['edmundsService', '$mdConstant', function(edmundsService, $mdConstant) {
     var vm = this;
 

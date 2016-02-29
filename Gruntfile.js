@@ -10,12 +10,6 @@ module.exports = function(grunt) {
           cssDir: 'css',
           environment: 'production'
         }
-      },
-      dev: {                    // Another target 
-        options: {
-          sassDir: 'sass',
-          cssDir: 'css'
-        }
       }
     },
     watch: {
@@ -42,7 +36,16 @@ module.exports = function(grunt) {
       },
     },
     jshint: {
-      all: ['js/**/*.js']
+      all: ['js/**/*.js'],
+      options: {
+        globals: {
+          jQuery: true,
+          module: true,
+          angular: true,
+          require: true,
+          strict: true
+        }
+      },
     },
     browserify: {
       files: {

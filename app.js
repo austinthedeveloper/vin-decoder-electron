@@ -6,8 +6,6 @@ var app = angular.module('plnkrApp', ['ngMaterial', 'edmundsApi']);
 app
   .controller("VINController", require('./controllers/VinController.js'));
 },{"./controllers/VinController.js":2,"./edmunds":3}],2:[function(require,module,exports){
-'use strict';
-
 module.exports = ['edmundsService', '$mdConstant', function(edmundsService, $mdConstant) {
     var vm = this;
 
