@@ -28,7 +28,7 @@ module.exports = function(grunt) {
       },
       js: {
         files: ['js/**/*.js'],
-        tasks: ['jshint'],
+        tasks: ['jshint', 'browserify'],
         options: {
           spawn: false,
         },
@@ -37,6 +37,13 @@ module.exports = function(grunt) {
     jshint: {
       all: ['js/**/*.js']
     },
+    browserify: {
+      files: {
+        files: {
+          'app.js' : ['./js/app.js']
+        }
+      }
+    }
   });
 
   // Load the plugin
@@ -46,6 +53,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
 
   // Default task(s).
-  grunt.registerTask('default', ['compass', 'watch']);
+  grunt.registerTask('default', ['compass', 'browserify', 'watch']);
 
 };
